@@ -54,8 +54,8 @@
 
     <repositories>
         <repository>
-            <id>openshift-repository</id>
-            <url>https://mirror.openshift.com/nexus/content/groups/public</url>
+            <id>redhat-repository</id>
+            <url>https://maven.repository.redhat.com/ga/</url>
         </repository>
     </repositories>
 

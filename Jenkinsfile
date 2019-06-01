@@ -51,33 +51,6 @@ def mvnCmd = "mvn -s configuration/cicd-settings-nexus3.xml"
                     }
                   }
                 }
-              }
-              stage('Promote to STAGE?') {
-                agent {
-                  label 'skopeo'
-                }
-                steps {
-                  timeout(time:15, unit:'MINUTES') {
-                      input message: "Promote to STAGE?", ok: "Promote"
-                  }
-
-                  script {
-                    openshift.withCluster() {
-                       openshift.tag("${env.DEV_PROJECT}/tasks:latest", "${env.STAGE_PROJECT}/tasks:stage")
-                    }
-                  }
-                }
-              }
-              stage('Deploy STAGE') {
-                steps {
-                  script {
-                    openshift.withCluster() {
-                      openshift.withProject(env.STAGE_PROJECT) {
-                        openshift.selector("dc", "tasks").rollout().latest();
-                      }
-                    }
-                  }
-                }
-              }
+              }              
             }
           }
